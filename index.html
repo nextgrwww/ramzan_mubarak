@@ -29,16 +29,17 @@
         .card-container {
             position: relative;
             width: 100%;
-            height: 100dvh; /* Fits mobile viewport exactly */
-            background: transparent; /* Removed card background */
-            border: none; /* Removed border */
+            height: 100dvh;
+            background: transparent;
+            border: none;
             border-radius: 0;
-            box-shadow: none; /* Removed shadow */
+            box-shadow: none;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center; /* Center content vertically */
+            justify-content: center;
             padding: 20px;
+            transition: all 0.5s ease-in-out;
         }
 
         /* Animations */
@@ -88,12 +89,13 @@
 
         .arabic-text {
             font-family: 'Amiri', serif;
-            font-size: 4rem; /* Slightly larger for full screen */
+            font-size: 4rem;
             background: linear-gradient(to bottom, #fde68a, #fbbf24);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 0.5rem;
             text-shadow: 0 0 30px rgba(251, 191, 36, 0.3);
+            line-height: 1.2;
         }
 
         .sparkle {
@@ -126,15 +128,61 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            /* Adjust spacing for mobile */
             flex-grow: 1; 
             justify-content: center;
         }
         
         .sky-container {
              width: 100%;
-             max-width: 600px; /* Prevent SVG getting too huge on desktop */
+             max-width: 600px;
              flex-shrink: 0;
+             transition: width 0.5s ease;
+        }
+
+        /* --- DESKTOP / LANDSCAPE ADJUSTMENTS --- */
+        @media (min-width: 1024px) {
+            .card-container {
+                flex-direction: row; /* Switch to side-by-side */
+                justify-content: center;
+                gap: 4rem; /* Space between image and text */
+                padding: 0 10%; /* Add horizontal padding */
+            }
+
+            .sky-container {
+                width: 50%; /* Image takes half width */
+                max-width: 800px; /* Allow it to grow larger */
+                height: auto;
+                margin-bottom: 0;
+            }
+
+            .content-box {
+                width: 40%; /* Text takes slightly less than half */
+                align-items: flex-start; /* Left align items */
+                text-align: left; /* Left align text */
+                flex-grow: 0; /* Stop it from stretching vertically unnecessarily */
+            }
+
+            .arabic-text {
+                font-size: 6rem; /* Larger Arabic text on desktop */
+                text-align: left;
+            }
+
+            .content-box h2 {
+                text-align: left;
+                font-size: 2.5rem; /* Larger English heading */
+            }
+
+            .content-box p.text-slate-300 {
+                text-align: left;
+                padding-left: 0;
+                font-size: 1.25rem; /* Larger body text */
+                max-width: 600px;
+            }
+
+            .content-box .mt-12 {
+                align-self: flex-start; /* Align the footer text to start */
+                margin-top: 4rem;
+            }
         }
     </style>
 </head>
@@ -144,7 +192,7 @@
         <div class="pattern-overlay"></div>
 
         <!-- Animated Sky Header -->
-        <div class="sky-container relative h-64 mb-4">
+        <div class="sky-container relative h-64 md:h-96 lg:h-auto aspect-video mb-4 lg:mb-0">
             <svg viewBox="0 0 400 250" class="w-full h-full" preserveAspectRatio="xMidYMid meet">
                 <!-- Stars -->
                 <g id="stars-group"></g>
