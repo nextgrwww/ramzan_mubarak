@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ramadan Mubarak</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@300;400;600&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: radial-gradient(circle at center, #1a2a6c, #b21f1f, #fdbb2d);
+            background: linear-gradient(to bottom, #0f172a, #1e1b4b, #312e81);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .card-container {
+            position: relative;
+            width: 90%;
+            max-width: 500px;
+            height: 700px;
+            background: rgba(15, 23, 42, 0.8);
+            border: 2px solid rgba(234, 179, 8, 0.3);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 30px rgba(234, 179, 8, 0.1);
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        /* Animations */
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+
+        @keyframes swing {
+            0% { transform: rotate(-5deg); }
+            100% { transform: rotate(5deg); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes glow {
+            0%, 100% { filter: drop-shadow(0 0 5px #fbbf24); }
+            50% { filter: drop-shadow(0 0 20px #fbbf24); }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .star {
+            fill: #fbbf24;
+            animation: twinkle var(--duration) infinite ease-in-out;
+            opacity: 0.6;
+        }
+
+        .lantern {
+            transform-origin: top center;
+            animation: swing 3s infinite alternate ease-in-out;
+        }
+
+        .moon {
+            animation: glow 4s infinite ease-in-out;
+        }
+
+        .floating-text {
+            animation: slideUp 1.5s ease-out forwards;
+        }
+
+        .arabic-text {
+            font-family: 'Amiri', serif;
+            font-size: 3rem;
+            background: linear-gradient(to bottom, #fde68a, #fbbf24);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .sparkle {
+            position: absolute;
+            pointer-events: none;
+            background: white;
+            border-radius: 50%;
+            opacity: 0;
+        }
+
+        /* Geometric Pattern Background Overlay */
+        .pattern-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.05;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l15 30-15 30-15-30z' fill='%23eab308' fill-rule='evenodd'/%3E%3C/svg%3E");
+            z-index: 0;
+        }
+
+        .content-box {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            width: 100%;
+        }
+
+        .btn-interact {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .btn-interact:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(234, 179, 8, 0.4);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card-container" id="mainCard">
+        <div class="pattern-overlay"></div>
+
+        <!-- Animated Sky Header -->
+        <div class="relative w-full h-64 mb-8">
+            <svg viewBox="0 0 400 250" class="w-full h-full">
+                <!-- Stars -->
+                <g id="stars-group"></g>
+                
+                <!-- Moon -->
+                <path class="moon" d="M200 40 A80 80 0 1 0 280 120 A65 65 0 1 1 200 40" fill="#fbbf24" filter="url(#glowBlur)" />
+                
+                <!-- Lantern Left -->
+                <g class="lantern" style="animation-delay: -0.5s">
+                    <line x1="80" y1="0" x2="80" y2="40" stroke="#d97706" stroke-width="2" />
+                    <rect x="65" y="40" width="30" height="45" rx="4" fill="#fbbf24" fill-opacity="0.9" />
+                    <path d="M65 40 L80 30 L95 40" fill="#d97706" />
+                    <path d="M65 85 L80 95 L95 85" fill="#d97706" />
+                    <rect x="72" y="45" width="2" height="35" fill="#d97706" opacity="0.5" />
+                    <rect x="86" y="45" width="2" height="35" fill="#d97706" opacity="0.5" />
+                    <circle cx="80" cy="62" r="8" fill="#fff" opacity="0.3" filter="blur(4px)" />
+                </g>
+
+                <!-- Lantern Right -->
+                <g class="lantern" style="animation-delay: -1.8s">
+                    <line x1="320" y1="0" x2="320" y2="60" stroke="#d97706" stroke-width="2" />
+                    <rect x="305" y="60" width="30" height="45" rx="4" fill="#fbbf24" fill-opacity="0.9" />
+                    <path d="M305 60 L320 50 L335 60" fill="#d97706" />
+                    <path d="M305 105 L320 115 L335 105" fill="#d97706" />
+                    <rect x="312" y="65" width="2" height="35" fill="#d97706" opacity="0.5" />
+                    <rect x="326" y="65" width="2" height="35" fill="#d97706" opacity="0.5" />
+                    <circle cx="320" cy="82" r="8" fill="#fff" opacity="0.3" filter="blur(4px)" />
+                </g>
+
+                <!-- Mosque Silhouette -->
+                <path d="M0 250 L0 220 Q50 210 100 220 L100 180 Q125 140 150 180 L150 210 L250 210 L250 160 Q285 110 320 160 L320 220 Q360 210 400 220 L400 250 Z" 
+                      fill="#020617" />
+                
+                <defs>
+                    <filter id="glowBlur">
+                        <feGaussianBlur stdDeviation="3" result="blur" />
+                        <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                    </filter>
+                </defs>
+            </svg>
+        </div>
+
+        <!-- Card Content -->
+        <div class="content-box flex flex-col items-center flex-grow">
+            <h1 class="arabic-text floating-text">رمضان مبارك</h1>
+            <h2 class="text-3xl font-bold text-yellow-500 mb-2 floating-text" style="animation-delay: 0.2s">Ramadan Mubarak</h2>
+            <p class="text-slate-300 text-center px-8 mb-8 floating-text leading-relaxed" style="animation-delay: 0.4s">
+                May this holy month bring you peace, joy, and spiritual growth. May your fasts and prayers be accepted.
+            </p>
+
+            <div class="mt-auto w-full px-8 pb-4">
+                <button id="wishBtn" class="btn-interact w-full py-4 bg-yellow-600 hover:bg-yellow-500 text-white font-semibold rounded-xl shadow-lg transition-all duration-300 floating-text" style="animation-delay: 0.6s">
+                    Alhamdolillah
+                </button>
+                <p class="text-xs text-slate-500 text-center mt-4">Tap to light up the sky</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Generate stars dynamically
+        const starsGroup = document.getElementById('stars-group');
+        for (let i = 0; i < 60; i++) {
+            const x = Math.random() * 400;
+            const y = Math.random() * 200;
+            const size = Math.random() * 2 + 0.5;
+            const duration = 2 + Math.random() * 4;
+            const delay = Math.random() * 5;
+
+            const star = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+            star.setAttribute("cx", x);
+            star.setAttribute("cy", y);
+            star.setAttribute("r", size);
+            star.setAttribute("class", "star");
+            star.setAttribute("style", `--duration: ${duration}s; animation-delay: ${delay}s`);
+            starsGroup.appendChild(star);
+        }
+
+        // Button Interactivity
+        const btn = document.getElementById('wishBtn');
+        const card = document.getElementById('mainCard');
+
+        btn.addEventListener('click', () => {
+            // Create sparkle burst - INCREASED DENSITY
+            // Spawning 100 particles with slight delays for a more "explosive" feel
+            for (let i = 0; i < 100; i++) {
+                setTimeout(createSparkle, Math.random() * 300);
+            }
+            
+            // Change button text briefly
+            const originalText = "Alhamdolillah";
+            btn.innerText = "✨ Praise be to Allah! ✨";
+            btn.classList.replace('bg-yellow-600', 'bg-green-600');
+            
+            setTimeout(() => {
+                btn.innerText = originalText;
+                btn.classList.replace('bg-green-600', 'bg-yellow-600');
+            }, 3000);
+        });
+
+        function createSparkle() {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            // Varied sizes for depth
+            const size = Math.random() * 8 + 3;
+            sparkle.style.width = `${size}px`;
+            sparkle.style.height = `${size}px`;
+            
+            // Start from the bottom center-ish
+            const startX = Math.random() * window.innerWidth;
+            const startY = window.innerHeight + 20;
+            
+            sparkle.style.left = `${startX}px`;
+            sparkle.style.top = `${startY}px`;
+            
+            // Gold variations
+            const hue = 35 + (Math.random() * 10 - 5); 
+            sparkle.style.background = `hsl(${hue}, 100%, 70%)`;
+            sparkle.style.boxShadow = `0 0 ${size * 2}px hsl(${hue}, 100%, 50%)`;
+            
+            document.body.appendChild(sparkle);
+            
+            // More dramatic movement
+            const destinationX = startX + (Math.random() - 0.5) * 400; // Wider spread
+            const destinationY = -100; // Float completely off screen
+            
+            sparkle.animate([
+                { transform: 'translate(0, 0) scale(0.5)', opacity: 0 },
+                { transform: `translate(0, -100px) scale(1.2)`, opacity: 1, offset: 0.2 }, // Pop in
+                { transform: `translate(${destinationX - startX}px, ${destinationY - startY}px) scale(0)`, opacity: 0 }
+            ], {
+                duration: 1500 + Math.random() * 1500, // Varied speeds
+                easing: 'cubic-bezier(0.25, 1, 0.5, 1)'
+            }).onfinish = () => sparkle.remove();
+        }
+
+        // Parallax effect on mouse move
+        document.addEventListener('mousemove', (e) => {
+            const x = (window.innerWidth / 2 - e.pageX) / 50;
+            const y = (window.innerHeight / 2 - e.pageY) / 50;
+            card.style.transform = `rotateY(${x}deg) rotateX(${-y}deg)`;
+        });
+    </script>
+</body>
+</html>
